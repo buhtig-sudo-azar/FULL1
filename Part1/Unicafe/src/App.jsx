@@ -17,6 +17,7 @@ const Display = (props) => {
   )
 
 }
+
 function App() {
   const [good, setGood] = useState(0);
   const [newtral, stNewtral] = useState(0);
@@ -26,9 +27,9 @@ function App() {
     <>
 
       <h1>Geeve feedback</h1>
-      <Button onclick={() => setGood(good + 1)} text="good" />
-      <Button onclick={() => stNewtral(newtral + 1)} text="newtral" />
-      <Button onclick={() => setBad(bad + 1)} text="bad" />
+      <Button onclick={() => setGood(good => good + 1)} text="good" />
+      <Button onclick={() => stNewtral(newtral => newtral + 1)} text="newtral" />
+      <Button onclick={() => setBad(bad => bad + 1)} text="bad" />
 
       <Display good={good} newtral={newtral} bad={bad} />
     </>
