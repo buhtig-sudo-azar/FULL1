@@ -5,7 +5,7 @@ const Button = (props) => {
     <button onClick={onclick}>{text}</button>
   )
 }
-const Display = (props) => {
+const Statistics = (props) => {
   const { good, neutral, bad, all, avg, pos } = props;
   return (
     <>
@@ -46,7 +46,7 @@ function App() {
       <Button onclick={() => setNeutral(neutral => neutral + 1)} text="neutral" />
       <Button onclick={() => setBad(bad => bad + 1)} text="bad" />
 
-      <Display good={good} neutral={neutral} bad={bad} all={good + bad + neutral} avg={average()} pos={positive()} />
+      <Statistics good={good} neutral={neutral} bad={bad} all={good + bad + neutral} avg={average()} pos={positive()} />
     </>
   )
 }
