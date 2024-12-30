@@ -5,22 +5,34 @@ const Button = (props) => {
     <button onClick={onclick}>{text}</button>
   )
 }
-const Statistics = (props) => {
-  const { good, neutral, bad, all, avg, pos } = props;
+const StatisticLine = (props) => {
+  const { text, value } = props;
   return (
     <>
-      <h4>Statistics</h4>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {all}</p>
-
-
-      <p>average {avg}</p>
-      <p>positive {pos}</p>
+      <h5>{text} {value}</h5>
     </>
   )
+}
+const Statistics = (props) => {
+  const { good, neutral, bad, all, avg, pos } = props;
 
+  if (all != 0) {
+    return (
+      <>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine text="avg" value={avg} />
+        <StatisticLine text="pos" value={pos} />
+      </>
+    )
+  } else {
+    return (
+      <>
+        <h4>No feedback geeven</h4>
+      </>
+    )
+  }
 }
 
 
@@ -31,7 +43,7 @@ function App() {
   const all = good + bad + neutral;
 
   const average = () => {
-    if (all == 0) return 0;
+    if (all == 0) { return 0; }
     return ((good - bad) / all)
   }
   const positive = () => {
