@@ -9,7 +9,7 @@ const StatisticLine = (props) => {
   const { text, value } = props;
   return (
     <>
-      <h5>{text} {value}</h5>
+      <h5>{text}    {value}</h5>
     </>
   )
 }
@@ -22,8 +22,8 @@ const Statistics = (props) => {
         <StatisticLine text="good" value={good} />
         <StatisticLine text="neutral" value={neutral} />
         <StatisticLine text="bad" value={bad} />
-        <StatisticLine text="avg" value={avg} />
-        <StatisticLine text="pos" value={pos} />
+        <StatisticLine text="average" value={avg} />
+        <StatisticLine text="positive" value={pos} />
       </>
     )
   } else {
