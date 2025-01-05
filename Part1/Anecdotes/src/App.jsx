@@ -1,14 +1,14 @@
 import { useState } from 'react'
-const Button = (props)=>{
-  const {text, click} = props;
-  return(
+const Button = (props) => {
+  const { text, click } = props;
+  return (
     <>
-  <button onClick={click}>{text}</button> 
-  </>
+      <button onClick={click}>{text}</button>
+    </>
   )
 }
 const App = () => {
-  
+
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -20,20 +20,12 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
   const [selected, setSelected] = useState(anecdotes[Math.floor(Math.random() * anecdotes.length)]);
-  const getRandEl=()=> {
-    return anecdotes[Math.floor(Math.random() * anecdotes.length)];
-  }
+  const clickHandler = () => setSelected(anecdotes[Math.floor(Math.random() * anecdotes.length)])
 
-
-  
-const clickHandler =()=>{
-setSelected(getRandEl)
-console.log(selected)
-}
   return (
     <>
-     <p> {selected}</p>
-      <Button click={clickHandler} text="next anekdote"/>
+      <p> {selected}</p>
+      <Button click={clickHandler} text="next anekdote" />
     </>
   )
 }
