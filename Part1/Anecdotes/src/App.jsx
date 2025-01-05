@@ -1,14 +1,15 @@
 import { useState } from 'react'
+
 const Button = (props) => {
-  const { text, click } = props;
+  const { onclick, text } = props;
   return (
     <>
-      <button onClick={click}>{text}</button>
+      <button onClick={onclick}>{text}</button>
     </>
   )
 }
-const App = () => {
 
+const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -19,21 +20,32 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-  const [vote, setVotes] = useState();
-  const [selected, setSelected] = useState(anecdotes[Math.floor(Math.random() * anecdotes.length)]);
-  const clickHandler = () => setSelected(anecdotes[Math.floor(Math.random() * anecdotes.length)])
 
-  const voteHandler = () => {setVotes(anecdotes.indexOf(selected)+1)}
-  
+  const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+
+  const vote = (index) => {
+    setVotes(prevVotes => {
+      const newVotes = [...prevVotes]
+      newVotes[index] += 1
+      return newVotes
+    })
+  }
+
+  const nextAnecdote = () => {
+    setSelected((prevSelected) => (prevSelected + 1) % anecdotes.length)
+  }
+
   return (
-    <>
-      <p> {selected}</p>
-      <p>Has {vote} votes</p>
-      <Button click={voteHandler} text="vote" />
-      <Button click={clickHandler} text="next anekdote" />
-      
-    </>
+    <div>
+      <h1>Anecdote of the day</h1>
+      <p>{anecdotes[selected]}</p>
+      <p>Has {votes[selected]} votes</p>
+      <Button onclick={() => vote(selected)} text="Vote" />
+      <Button onclick={() => nextAnecdote(selected)} text="Next anecdote" />
+
+    </div>
   )
 }
 
-export default App;
+export default App
