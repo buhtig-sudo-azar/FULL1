@@ -10,10 +10,6 @@ const Button = (props) => {
 }
 
 
-
-import React, { useState } from 'react'; // Импортируем useState из React и стили CSS для нашего приложения
-import './App.css';
-
 // Массив с анекдотами
 const anecdotes = [
   'If it hurts, do it more often.',
@@ -34,6 +30,27 @@ const App = () => {
   // Состояние для подсчета голосов каждого анекдота
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0)); // Создаем массив votes длиной anecdotes.length и заполняем его нулями
 
+
+
+  // // окрашиваем наивысшее значение в желтый цвет
+  // const colorVotes = () => {
+  //   setTimeout(() => {
+  //     if (Array.isArray(votes) && votes.length > 0) {
+      
+  //       let p = document.querySelector('div > p');
+  //       if (votes[selected] != null) {
+  //         p.style.backgroundColor = "yellow";
+  //       }else{
+  //         p.style.backgroundColor = "black";
+  //       } 
+  //     } else {
+  //       console.log("Нет данных для подсчета голосов");
+  //     }
+  //   }, 0);
+  // };
+  
+
+
   // Функция для увеличения голосов за текущий анекдот
   const vote = (index) => {
     setVotes(prevVotes => { // Используем функцию-обновителя для обновления votes
@@ -41,38 +58,40 @@ const App = () => {
       newVotes[index] += 1; // Увеличиваем значение на нужном индексе
       return newVotes; // Возвращаем новую копию votes
     });
+    // colorVotes()
   };
 
 
-  
   /*
   Эта функция отвечает за переключение следующего анекдота. Вот как она работает:
 const nextAnecdote = () => { ... }:
 Это объявление функции. Она не принимает никаких аргументов и ничего не возвращает.
-setSelected(:
-Здесь мы используем функцию-обновитель для обновления выбранного состояния.
-(prevSelected):
-Это параметр функции-обновителя. Он содержит текущее выбранное значение.
-=>:
-Это стрелочная функция, которая будет выполнена вместо обычных выражений.
+setSelected(:  Здесь мы используем функцию-обновитель для обновления выбранного состояния.
+(prevSelected):   Это параметр функции-обновителя. Он содержит текущее выбранное значение.
+=>:   Это стрелочная функция, которая будет выполнена вместо обычных выражений.
 (prevSelected + 1):
 Мы увеличиваем текущее значение, выбранное на 1.
 % anecdotes.length:
 Этот оператор модуля (%) используется для возврата к начальному массиву в конце.
 Например, если anecdotes.length = 8:
 Если prevSelected = 0, (0 + 1) % 8 = 1
-Если prevSelected = 7, (7 + 1) % 8 = 0
+Если prevS
+elected = 7, (7 + 1) % 8 = 0
 ):
 Закрывает выражение внутри функции-обновителя.
 ):
 Закрывает саму функцию-обновителя.
 Таким образом, выбрана эта функция обновляется, увеличивая ее на 1 с помощью % для возврата к началу массива в конце. Это обеспечивает циклическое переключение между анекдотами.
-
 Когда мы вызываем эту функцию, она обновляет выбранное состояние, что приводит к перерендерингу компонента с новым анекдотом.
   */
   const nextAnecdote = () => {
     setSelected((prevSelected) => (prevSelected + 1) % anecdotes.length); // Обновляем selected, увеличивая его на 1 и используя % для возврата к началу при достижении конца
   };
+  //Находим наибольшее колличество голосов
+const maxVoteIndex =  votes.indexOf(Math.max(...votes));
+
+// Анекдот с наибольшим колличеством голосов
+const maxVotesAnecdote =  anecdotes[maxVoteIndex]
 
   // Версия компонента
   return (
@@ -80,11 +99,17 @@ setSelected(:
       <h1>Anecdote of the day</h1> {/* Заголовок для отображения */}
       <p>{anecdotes[selected]}</p> {/* Отображаем текущий анекдот */}
       <p>Has {votes[selected]} votes</p> {/* Отображаем количество голосов за текущий анекдот */}
-      <Button onclick={() => vote(selected)} text="Vote" />
+      <Button onclick={() => vote(selected)} text="Vote"  />
       <Button onclick={() => nextAnecdote(selected)} text="Next anecdote" />
-    </div>
-  );
-};
+        <h4>Anecdote with most votes</h4>
+        <p>{maxVotesAnecdote}</p>
+        <p>Has {Math.max(...votes)} votes</p>
+        </div>
+  );}
+
+
+   
+
 
 // Экспорт компонента App
 export default App;
