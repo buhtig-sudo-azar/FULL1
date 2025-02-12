@@ -1,17 +1,12 @@
 const Header = (props) => {
+  const {course} = props;
 return (
       <>
-        <h3> {props.course}</h3>
+        <h3> {course}</h3>
       </>
     )
   }
   
-  const Part = (props) => {
-    return (
-      <>
-        {props.name}
-      </>
-    )
-  }
+
 
   export default Header;

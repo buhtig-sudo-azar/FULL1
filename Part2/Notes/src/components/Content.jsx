@@ -2,7 +2,7 @@ import Part  from "./Part";
 
 const Content = (props) => {
     const { parts } = props;
-  
+    // console.log(parts)
     return (
       <>
   

@@ -2,9 +2,9 @@ const Total = (props) => {
   const { parts } = props;
   return (
     <>
-     Total of {
+      <h3>Total of {
         parts.reduce((acc, c) => acc + c.exercises, 0)
-      } exercises
+      } exercises</h3>
 
     </>
   )
