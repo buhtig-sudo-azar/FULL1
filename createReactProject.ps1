@@ -1,3 +1,3 @@
-npm create vite@latest testApp -- --template react
-cd testApp
+npm create vite@latest Notes -- --template react
+cd Notes
 npm install

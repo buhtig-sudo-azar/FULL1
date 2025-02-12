@@ -1,3 +1,4 @@
 git add .;
-git commit -m "latest changes >> 1.14*: anecdotes step 3";
+git commit -m "2.3*: Course information step 8";
 git push origin main;
+
