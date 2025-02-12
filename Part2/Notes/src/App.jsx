@@ -1,7 +1,5 @@
 import React from "react";
-import Header from './components/Header';
-import Total from './components/Total';
-import Content from './components/Content';
+import Course from './components/Course';
 
 
 const App = () => {
@@ -55,9 +53,7 @@ const App = () => {
     
 {courses.map(course => (
   <>
-    <Header course={course.name} />
-    <Content parts={course.parts} />
-    <Total parts={course.parts} />
+  <Course course={course}/>
   </>
 ))
 }
