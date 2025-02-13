@@ -1,4 +1,4 @@
 git add .;
-git commit -m "2.5: Separate module step 10";
+git commit -m "2.6: The Phonebook Step 1";
 git push origin main;
 

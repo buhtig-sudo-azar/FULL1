@@ -1,3 +1,3 @@
-npm create vite@latest Notes -- --template react
-cd Notes
+npm create vite@latest Phonebook -- --template react
+cd Phonebook
 npm install
