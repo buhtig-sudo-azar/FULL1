@@ -7,13 +7,18 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
 
-const addPerson = (event) =>{
+const addPerson = (event) =>{ 
 event.preventDefault()
 const personObject = {
   name: newName,
   id:persons.length+1,
 }
+// проверка на уникальность
+if(!persons.some(i=>i.name === newName)){
 setPersons(persons.concat(personObject))
+}else{
+  alert(`${newName} already in phonebook!`)
+}
 setNewName('')
 }
 
