@@ -5,7 +5,7 @@ const Filter = (props) =>{
   return(
     <>
     filter: <input value={value} onChange={onChange}></input>
-    {/* filter: <input value={filter} onChange={(event) => setFilter(event.target.value)}></input> */}
+    
     </>
   )
 }
