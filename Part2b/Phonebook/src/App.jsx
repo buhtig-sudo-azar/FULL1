@@ -1,25 +1,33 @@
 import { useState } from 'react'
 import "./style.css"
-
+const Filter = (props) =>{
+  const {value, onChange} = props;
+  return(
+    <>
+    filter: <input value={value} onChange={onChange}></input>
+    {/* filter: <input value={filter} onChange={(event) => setFilter(event.target.value)}></input> */}
+    </>
+  )
+}
 const App = () => {
-  // const [persons, setPersons] = useState([
-  //   { name: 'Arto Hellas',
-  //     number: '555-777+'
-  //    }
-  // ]) 
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  ])
+    { name: 'Arto Hellas',
+      number: '555-777+',
+      id:'1',
+     }
+  ]) 
+  // const [persons, setPersons] = useState([
+  //   { name: 'Arto Hellas', number: '040-123456', id: 1 },
+  //   { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+  //   { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+  //   { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
+  // ])
   const [newName, setNewName] = useState('')
   const [newPhone, setNewPhone] = useState('')
   const [filter, setFilter] = useState('');
+
  // Проверка на уникальность и заполнение всех полей
-
-
-  const addPerson = (event) => {
+const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
       name: newName,
@@ -31,15 +39,13 @@ const App = () => {
     return;
     }
     // проверка на уникальность
-    if (!persons.some(i => i.name === newName)) {
-      setPersons(persons.concat(personObject))
-    } else {
+    if (persons.some(i => i.name === newName)) {
       alert(`${newName} name already in phonebook!`)
+     
     }
-    if (!persons.some(i => i.number === newPhone)) {
-      setPersons(persons.concat(personObject))
-    } else {
+    if (persons.some(i => i.number == newPhone)) {
       alert(`${newPhone} phone already in phonebook!`)
+      return;
     }
     setNewName('')
   }
@@ -58,12 +64,13 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      filter: <input value={filter} onChange={(event) => setFilter(event.target.value)}></input>
+      <Filter value={filter} onChange={(event)=>setFilter(event.target.value)}/>
+    
       <h4>Add a new</h4>
       <form onSubmit={addPerson}>
         <div>
-          <p>name:    <input value={newName} onChange={handlePersonChange} /></p>
-          <p>number:  <input value={newPhone} onChange={handlePersonPhone} /></p>
+          <p>name:    <input value={newName} onChange={(event)=>setNewName(event.target.value)} /></p>
+          <p>number:  <input value={newPhone} onChange={(event)=>setNewPhone(event.target.value)} /></p>
         </div>
         <div>
           <button type="submit">add</button>
