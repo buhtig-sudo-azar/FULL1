@@ -3,9 +3,12 @@ import "./style.css"
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas',
+      number: '555-777+'
+     }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newPhone, setNewPhone] = useState('')
 
 const addPerson = (event) =>{ 
 event.preventDefault()
@@ -25,6 +28,9 @@ setNewName('')
 const handlePersonChange = (event) =>{
  setNewName(event.target.value)
 }
+const handlePersonPhone = (event) =>{
+ setNewPhone(event.target.value)
+}
 
   return (
     <div>
@@ -33,7 +39,8 @@ const handlePersonChange = (event) =>{
 
       <form onSubmit={addPerson}>
         <div>
-          name: <input value={newName} onChange={handlePersonChange}/>
+          <p>name:    <input value={newName} onChange={handlePersonChange}/></p>
+          <p>number:  <input value={newPhone} onChange={handlePersonPhone}/></p>
         </div>
         <div>
           <button type="submit">add</button>
