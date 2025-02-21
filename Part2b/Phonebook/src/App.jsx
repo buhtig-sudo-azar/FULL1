@@ -11,17 +11,11 @@ const Filter = (props) =>{
 }
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas',
-      number: '555-777+',
-      id:'1',
-     }
-  ]) 
-  // const [persons, setPersons] = useState([
-  //   { name: 'Arto Hellas', number: '040-123456', id: 1 },
-  //   { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-  //   { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-  //   { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  // ])
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
+  ])
   const [newName, setNewName] = useState('')
   const [newPhone, setNewPhone] = useState('')
   const [filter, setFilter] = useState('');
@@ -38,7 +32,7 @@ const addPerson = (event) => {
       alert('Пожалуйста, заполните все поля!');
     return;
     }
-    // проверка на уникальность
+    // проверки на уникальность
     if (persons.some(i => i.name === newName)) {
       alert(`${newName} name already in phonebook!`)
      
@@ -56,11 +50,16 @@ const addPerson = (event) => {
   const handlePersonPhone = (event) => {
     setNewPhone(event.target.value)
   }
- // Фильтрация контактов по имени
- const filteredPersons = persons.filter(person =>
-  person.name.toLowerCase().includes(filter.toLowerCase())
-);
 
+ // Фильтрация контактов по имени
+//  const filteredPersons = persons.filter(person =>
+//   person.name.toLowerCase().includes(filter.toLowerCase())
+// );
+
+// Фильтрация контактов по начальным символам имени
+const filteredPersons = persons.filter(person =>
+  person.name.toLowerCase().startsWith(filter.toLowerCase())
+);
   return (
     <div>
       <h2>Phonebook</h2>
