@@ -9,6 +9,37 @@ const Filter = (props) =>{
     </>
   )
 }
+const PersonForm = (props) => {
+  const { onSubmit, nameValue, phoneValue, onNameChange, onPhoneChange } = props;
+  
+  return (
+    <>
+      <form onSubmit={onSubmit}>
+        <div>
+          <p>name:    <input value={nameValue} onChange={onNameChange} /></p>
+          <p>number:  <input value={phoneValue} onChange={onPhoneChange} /></p>
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+    </>
+  )
+}
+const Persons = (props) =>{
+const {filteredPersons} = props;
+  return (
+    <>
+     <ul>{filteredPersons.map(i => (
+        <li key={i.id}>
+          {i.name} {i.number}
+        </li>)
+      )
+      }
+      </ul>
+    </>
+  )
+}
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
@@ -20,7 +51,7 @@ const App = () => {
   const [newPhone, setNewPhone] = useState('')
   const [filter, setFilter] = useState('');
 
- // Проверка на уникальность и заполнение всех полей
+
 const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
@@ -28,6 +59,7 @@ const addPerson = (event) => {
       number: newPhone,
       id: persons.length + 1,
     }
+     // Проверка на  заполнение всех полей
     if (!newName || !newPhone) {
       alert('Пожалуйста, заполните все поля!');
     return;
@@ -64,25 +96,15 @@ const filteredPersons = persons.filter(person =>
     <div>
       <h2>Phonebook</h2>
       <Filter value={filter} onChange={(event)=>setFilter(event.target.value)}/>
+    <h2>Add a new</h2>
+    <PersonForm onSubmit={addPerson} nameValue={newName}
+  phoneValue={newPhone}
+  onNameChange={(event) => setNewName(event.target.value)}
+  onPhoneChange={(event) => setNewPhone(event.target.value)}
+/>
     
-      <h4>Add a new</h4>
-      <form onSubmit={addPerson}>
-        <div>
-          <p>name:    <input value={newName} onChange={(event)=>setNewName(event.target.value)} /></p>
-          <p>number:  <input value={newPhone} onChange={(event)=>setNewPhone(event.target.value)} /></p>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
       <h2>Numbers</h2>
-      <ul>{filteredPersons.map(i => (
-        <li key={i.id}>
-          {i.name} {i.number}
-        </li>)
-      )
-      }
-      </ul>
+      <Persons filteredPersons={filteredPersons} />
     </div>
   )
 }
