@@ -1,3 +1,3 @@
-# 2.9*: The Phonebook Step 5
+# 2.11: The Phonebook Step 6
 
 ### Создание отдельных компонентов

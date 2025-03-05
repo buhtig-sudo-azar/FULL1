@@ -1,14 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Note from './components/Note'
+// import LocationTracker from './components/LocationTracker'
+import axios from 'axios'
 
 
-const App = (props) => {
-  const [notes, setNotes] = useState(props.notes)
+
+
+const App = () => {
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState(
     'a new note...'
   ) 
   const [showAll, setShowAll] = useState(true)
 
+  const hook = () => {
+    // console.log('effect')
+    axios.get('http://localhost:3001/notes').then(response =>  setNotes(response.data))
+  }
+  
+  useEffect(hook, [])
+  // console.log('render', notes.length, 'notes')
 
   const addNote = (event) => {
     event.preventDefault()
@@ -24,7 +35,7 @@ const App = (props) => {
 
 
 const handleNoteChange = (event) => {
-  console.log("console.log    ", event.target.value)
+  // console.log("console.log    ", event.target.value)
   setNewNote(event.target.value)
 }
 
@@ -50,7 +61,13 @@ const notesToShow = showAll
       <input value={newNote} onChange={handleNoteChange}/>
         <button type='submit'>save</button>
       </form>
+
+
+      {/* <LocationTracker /> */}
     </div>
+
+
+
   )
 }
 
