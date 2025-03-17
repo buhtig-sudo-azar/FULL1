@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import "./style.css"
 import axios from 'axios'
+import personService from '../services/persons'
 
 
 const Filter = (props) => {
@@ -76,6 +77,9 @@ const App = () => {
       number: newPhone,
       id: persons.length + 1,
     }
+
+
+
     // Проверка на  заполнение всех полей
     if (!newName || !newPhone) {
       alert('Пожалуйста, заполните все поля!');
@@ -90,9 +94,14 @@ const App = () => {
       alert(`${newPhone} phone already in phonebook!`)
       return;
     }
-    setPersons(persons.concat(personObject))
+
+    personService
+    .create(personObject)
+    .then(returnedNote => {
+      setPersons(persons.concat(personObject))
     setNewName('')
-  }
+    setNewPhone('')
+    })}
 
   const handlePersonChange = (event) => {
     setNewName(event.target.value)
