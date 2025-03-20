@@ -28,13 +28,14 @@ const PersonForm = (props) => {
   )
 }
 const Persons = (props) => {
-  const { filteredPersons } = props;
+  const { filteredPersons, onDelete } = props;
   return (
     <>
       <ul>{filteredPersons.map(i => (
         <li key={i.id}>
           {/* console.log(i.persons.id) */}
-          {i.name} {i.number}
+          {i.name} {i.number} 
+          <button onClick={()=>onDelete(i.id)}>delete</button>
         </li>)
       )
       }
@@ -58,18 +59,7 @@ const App = () => {
    
   const [persons, setPersons] = useState([])
 
-  useEffect(() => {
-    const fetchPersons = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/persons");
-        setPersons(response.data);
-      } catch (error) {
-        console.error('Error fetching persons:', error);
-      }
-    };
-    
-    fetchPersons();
-  }, []);
+
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
@@ -103,6 +93,20 @@ const App = () => {
     setNewPhone('')
     })}
 
+const deletePerson = (id)=> {
+  if(window.confirm(`Delete contact ${id}?`)){
+    console.log("before ", persons)
+   // debugger
+    personService.remove(id)
+  .then(() => {
+    setPersons(persons.filter(person => person.id !== id));
+    // alert(`Контакт ${id} success deleted!`) // Закомментировано
+    alert('Контакт успешно удален!');
+  })
+  .catch(error => alert(`${error} Contact not deleted!!!`))}
+  console.log("after ", persons)
+}
+
   const handlePersonChange = (event) => {
     setNewName(event.target.value)
   }
@@ -119,6 +123,20 @@ const App = () => {
   const filteredPersons = persons.filter(person =>
     person.name.toLowerCase().startsWith(filter.toLowerCase())
   );
+
+  useEffect(() => {
+    const fetchPersons = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/persons");
+        setPersons(response.data);
+      } catch (error) {
+        console.error('Error fetching persons:', error);
+      }
+    };
+    
+    fetchPersons();
+  }, []);
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -131,7 +149,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons filteredPersons={filteredPersons} />
+      <Persons filteredPersons={filteredPersons} onDelete={deletePerson} />
     </div>
   )
 }
