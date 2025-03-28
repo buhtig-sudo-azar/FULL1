@@ -1,1 +1,1 @@
-# 2.12: The Phonebook step 8
+# Adding styles to React app

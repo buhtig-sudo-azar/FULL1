@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import "./style.css"
+import "./index.css"
 import axios from 'axios'
 import personService from '../services/persons'
 
