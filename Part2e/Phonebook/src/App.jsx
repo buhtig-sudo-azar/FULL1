@@ -87,7 +87,14 @@ const App = () => {
       setTimeout(() => {
         setNotificationMessage(null);
         setNotificationType(null);
-      }, 5000);
+      }, 3000);
+    }).catch((error) => {
+      setNotificationMessage(`Not added ${newName}`);
+      setNotificationType('error');
+      setTimeout(() => {
+        setNotificationMessage(null);
+        setNotificationType(null);
+      }, 3000);
     });
   };
 
@@ -97,9 +104,20 @@ const App = () => {
         .remove(id)
         .then(() => {
           setPersons(persons.filter((person) => person.id !== id));
-          alert('Контакт успешно удален!');
-        })
-        .catch((error) => alert(`${error} Contact not deleted!!!`));
+          setNotificationMessage('Контакт успешно удален!')
+          setNotificationType('success');
+          setTimeout(() => {
+            setNotificationMessage(null);
+            setNotificationType(null);
+          }, 3000);
+        }).catch((error) => {
+          setNotificationMessage(`Not deleted ${newName}`);
+          setNotificationType('error');
+          setTimeout(() => {
+            setNotificationMessage(null);
+            setNotificationType(null);
+          }, 3000);
+        });
     }
   };
 

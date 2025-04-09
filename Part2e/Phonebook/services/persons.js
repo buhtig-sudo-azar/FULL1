@@ -6,10 +6,20 @@ const getAll = () => {
   return request.then(response =>  response.data)
 }
 
-const create = newObject => {
-  const request = axios.post(baseUrl, newObject)
-  return request.then(response => response.data)
-}
+// const create = newObject => {
+//   const request = axios.post(baseUrl, newObject)
+//   return request.then(response => response.data)
+// }
+
+const create = (newObject) => {
+  // Добавим случайную ошибку для имитации сбоя сервера
+  if (Math.random() < 0.9) { // 30% вероятность ошибки
+    return Promise.reject({ message: 'Ошибка сервера: не удалось добавить контакт.' });
+  }
+  const request = axios.post(baseUrl, newObject);
+  return request.then((response) => response.data);
+};
+
 
 const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject)
