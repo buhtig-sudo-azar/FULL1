@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <span>
-        finddd countries:{" "}
+        findddfff countries:{" "}
         <input value={searchTerm} onChange={searchHandlerCountry} />
       </span>
       <ul>
