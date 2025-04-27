@@ -1,3 +1,3 @@
-npm create vite@latest Phonebook -- --template react
-cd Phonebook
+npm create vite@latest Countries -- --template react
+cd countries
 npm install
