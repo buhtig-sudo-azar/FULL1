@@ -20,7 +20,7 @@ const countriesToShow = searchTerm
     : countries;
   return (
     <>
-    <span>find countries: <input value={searchTerm} onChange={searchHandlerCountry} /></span>
+    <span>finddd countries: <input value={searchTerm} onChange={searchHandlerCountry} /></span>
        <ul>
       {countriesToShow.map(country => (
          // ??? Напиши код для <li> здесь ???
