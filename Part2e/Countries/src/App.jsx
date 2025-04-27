@@ -18,17 +18,16 @@ function App() {
   const countriesToShow = searchTerm
     ? countries.filter((country) =>
         country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
-      ) // <-- Скобка здесь
+      )
     : countries;
   return (
     <>
       <span>
-        find countries:{" "}
+        find exampl countries:{" "}
         <input value={searchTerm} onChange={searchHandlerCountry} />
       </span>
       <ul>
         {countriesToShow.map((country) => (
-          // ??? Напиши код для <li> здесь ???
           <li key={country.cca3}>{country.name.common}</li>
         ))}
       </ul>
