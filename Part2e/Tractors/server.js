@@ -1,28 +1,24 @@
-import express from 'express';
-import axios from 'axios';
-import cors from 'cors';
-import puppeteer from 'puppeteer';
+import express from "express";
+import fs from "fs";
+import cors from "cors";
 
 const app = express();
 const port = 3000;
 
 app.use(cors());
 
-app.get('/api/tractordata', async (req, res) => {
-  try {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto('https://www.tractordata.com/lawn-tractors/tractor-brands/johndeere/johndeere-lawn-tractors.html');
-    await page.waitForSelector('img[src^="https://www.tractordata.com/ltphotos/"]'); // Ждем загрузки изображений
-    const html = await page.content();
-    await browser.close();
-    res.send(html);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error fetching data');
-  }
+app.get("/api/tractors", (req, res) => {
+  fs.readFile("tractors.json", "utf-8", (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error reading file!");
+    } else {
+      const tractors = JSON.parse(data);
+      res.json(tractors);
+    }
+  });
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+app.listen(port, () =>
+  console.log("Server listen in port http://localhost:${port}")
+);

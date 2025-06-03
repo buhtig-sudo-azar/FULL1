@@ -15,6 +15,9 @@ function App() {
 
   const searchHandlerCountry = (event) => {
     setSearchTerm(event.target.value);
+    if (selectedCountry) {
+      setSelectedCountry(null); // Сбрасываем selectedCountry при изменении searchTerm
+    }
   };
   const buttonHandlerShow = (country) => {
     setSelectedCountry(country);
@@ -25,7 +28,7 @@ function App() {
         const countryNameLower = country.name.common.toLowerCase();
         return countryNameLower.includes(searchTerm.toLowerCase());
       })
-    : [];
+    : countries; // Показывать все страны, если searchTerm пустой
 
   return (
     <div style={{ margin: "3%" }}>
@@ -34,9 +37,10 @@ function App() {
         <input value={searchTerm} onChange={searchHandlerCountry} />
       </span>
 
-      {countriesToShow.length > 10 ? (
+      {countriesToShow.length > 10 && searchTerm && selectedCountry === null ? (
         <h5>Too many matches, specify another filter!!!!</h5>
-      ) : (
+      ) : selectedCountry === null &&
+        (searchTerm || countriesToShow.length <= 10) ? (
         <ul>
           {countriesToShow.map((country) => (
             <div key={country.cca3}>
@@ -47,7 +51,7 @@ function App() {
             </div>
           ))}
         </ul>
-      )}
+      ) : null}
 
       {selectedCountry && (
         <div>
@@ -58,6 +62,7 @@ function App() {
             src={selectedCountry.flags.png}
             alt={`Flag of ${selectedCountry.name.common}`}
           />
+          <h2>WEATHER {selectedCountry.name.common}</h2>
         </div>
       )}
     </div>
