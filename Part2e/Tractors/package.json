@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serv": "node server.js",
+    "serv2": "python3 server2.py"
   },
   "dependencies": {
     "axios": "^1.9.0",
@@ -17,7 +19,8 @@
     "node-fetch": "^3.3.2",
     "puppeteer": "^24.9.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "requests": "^0.3.0"
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
